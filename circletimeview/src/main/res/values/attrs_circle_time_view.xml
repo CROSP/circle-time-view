@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleTimeView">
+        <attr name="ctvLabelText" format="string"/>
+        <attr name="ctvLabelTextSize" format="dimension"/>
+        <attr name="ctvMarkSize" format="dimension"/>
+        <attr name="ctvQuarterMarkSize" format="dimension"/>
+        <attr name="ctvTimeNumbersTextSize" format="dimension"/>
+        <attr name="ctvQuarterNumberTextSize" format="dimension"/>
+        <attr name="ctvPaddingInnerRadius" format="dimension"/>
+        <attr name="ctvPaddingQuarterNumber" format="dimension"/>
+        <attr name="ctvMarkLineWidth" format="dimension"/>
+        <attr name="ctvCurrentTimeInSeconds" format="integer"/>
+        <attr name="ctvMarginTopLabel" format="dimension"/>
+        <attr name="ctvLapLabelTextSize" format="dimension"/>
+        <attr name="ctvLapLabelMarginTop" format="dimension"/>
+        <attr name="ctvCircleStrokeWidth" format="dimension"/>
+        <attr name="ctvCircleHandButtonRadius" format="dimension"/>
+        <attr name="ctvMinutesMarkCount" format="integer"/>
+        <attr name="ctvTimeFormat" format="enum">
+            <enum name="seconds_minutes" value="0"/>
+            <enum name="minutes_hours" value="1"/>
+        </attr>
+        <attr name="ctvCircleColor" format="color|integer"/>
+        <attr name="ctvCircleButtonColor" format="color|integer"/>
+        <attr name="ctvCirclePressedButtonColor" format="color|integer"/>
+        <attr name="ctvLineColor" format="color|integer"/>
+        <attr name="ctvQuarterNumberColor" format="color|integer"/>
+        <attr name="ctvHighlightLineColor" format="color|integer"/>
+        <attr name="ctvTimeNumberColor" format="color|integer"/>
+        <attr name="ctvLabelTextColor" format="color|integer"/>
+        <attr name="ctvLapBackgroundColor" format="color|integer"/>
+        <attr name="ctvLapTextColor" format="color|integer"/>
+        <attr name="ctvMultiLapRotation" format="boolean"/>
+        <attr name="ctvShowLaps" format="boolean"/>
+        <attr name="ctvTimeMode" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="timer" value="1"/>
+            <enum name="manual" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

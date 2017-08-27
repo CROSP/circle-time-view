@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_light_blue"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="net.crosp.android.circletimeviewexample.MainActivity">
+
+    <net.crosp.libs.android.circletimeview.CircleTimeView
+        android:id="@+id/circle_timer_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        app:ctvCircleButtonColor="#099ef4"
+        app:ctvCircleColor="#00d9ff"
+        app:ctvCircleHandButtonRadius="10dp"
+        app:ctvCirclePressedButtonColor="#08bfdf"
+        app:ctvCircleStrokeWidth="1dp"
+        app:ctvCurrentTimeInSeconds="1000"
+        app:ctvHighlightLineColor="#00f7ff"
+        app:ctvLabelText="The сlock is ticking"
+        app:ctvLabelTextColor="#fff"
+        app:ctvLabelTextSize="18sp"
+        app:ctvLapBackgroundColor="#9adf1b"
+        app:ctvLapLabelMarginTop="15dp"
+        app:ctvLapLabelTextSize="12sp"
+        app:ctvLapTextColor="#fff"
+        app:ctvLineColor="#ffffff"
+        app:ctvMarginTopLabel="22dp"
+        app:ctvMarkLineWidth="1dp"
+        app:ctvMarkSize="10dp"
+        app:ctvMinutesMarkCount="120"
+        app:ctvMultiLapRotation="true"
+        app:ctvPaddingInnerRadius="15dp"
+        app:ctvPaddingQuarterNumber="5dp"
+        app:ctvQuarterMarkSize="20dp"
+        app:ctvQuarterNumberColor="#08ff00"
+        app:ctvQuarterNumberTextSize="16sp"
+        app:ctvShowLaps="true"
+        app:ctvTimeFormat="seconds_minutes"
+        app:ctvTimeMode="manual"
+        app:ctvTimeNumberColor="#00d0ff"
+        app:ctvTimeNumbersTextSize="55sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/button_manual_setup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"
+            android:text="Manual Setup"/>
+
+        <Button
+            android:id="@+id/button_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:text="Start Timer"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
