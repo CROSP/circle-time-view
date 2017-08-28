@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CircleTimeViewExample.iml" filepath="$PROJECT_DIR$/CircleTimeViewExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/circletimeview/circletimeview.iml" filepath="$PROJECT_DIR$/circletimeview/circletimeview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/circle-time-view/circle-time-view.iml" filepath="$PROJECT_DIR$/circle-time-view/circle-time-view.iml" />
     </modules>
   </component>
 </project>
