@@ -25,6 +25,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'net.crosp.libs.android:circle-time-view:1.0.0'
+    compile project(':circle-time-view')
     testCompile 'junit:junit:4.12'
 }

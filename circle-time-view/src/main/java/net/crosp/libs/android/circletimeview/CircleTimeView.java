@@ -16,6 +16,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,21 +57,21 @@ public class CircleTimeView extends View {
     private static final String DEFAULT_LABEL_TEXT = "";
 
     // Default color
-    private static final int DEFAULT_CIRCLE_COLOR = 0x00f7ff;
-    private static final int DEFAULT_CIRCLE_BUTTON_COLOR = 0x00f7ff;
+    private static final int DEFAULT_CIRCLE_COLOR = 0xFFBBDEFB;
+    private static final int DEFAULT_CIRCLE_BUTTON_COLOR = 0xFFBBDEFB;
     private static final int DEFAULT_LAP_TEXT_COLOR = Color.RED;
-    private static final int DEFAULT_LAP_BACKGROUND_COLOR = 0x9adf1b;
+    private static final int DEFAULT_LAP_BACKGROUND_COLOR = Color.WHITE;
     private static final int DEFAULT_CIRCLE_BUTTON_PRESSED_COLOR = 0x00f7ff;
-    private static final int DEFAULT_LINE_COLOR = 0x00f7ff;
-    private static final int DEFAULT_HIGHLIGHT_LINE_COLOR = 0x00f7ff;
-    private static final int DEFAULT_NUMBER_COLOR = 0x00f7ff;
-    private static final int DEFAULT_TIME_NUMBER_COLOR = 0x00d0ff;
-    private static final int DEFAULT_QUARTER_NUMBER_COLOR = 0x08ff00;
-    private static final int DEFAULT_TIME_COLON_COLOR = 0x00f7ff;
-    private static final int DEFAULT_LABEL_TEXT_COLOR = 0x00f7ff;
+    private static final int DEFAULT_LINE_COLOR = 0xFF93C2EF;
+    private static final int DEFAULT_HIGHLIGHT_LINE_COLOR = 0xFF74EEF1;
+    private static final int DEFAULT_NUMBER_COLOR = 0xFFBBDEFB;
+    private static final int DEFAULT_TIME_NUMBER_COLOR = Color.WHITE;
+    private static final int DEFAULT_QUARTER_NUMBER_COLOR = 0xFFBBDEFB;
+    private static final int DEFAULT_TIME_COLON_COLOR = Color.BLACK;
+    private static final int DEFAULT_LABEL_TEXT_COLOR = Color.BLACK;
 
     // Clock face
-    public static final int DEFAULT_MINUTE_MARK_COUNT = 60;
+    public static final int DEFAULT_MINUTE_MARK_COUNT = 120;
     public static final int DEFAULT_TIME = 0;
     public static final int DEFAULT_HAND_POSITION_ANGLE = 0;
     public static final String TEXT_MINUTES_45 = "45";
@@ -154,7 +155,7 @@ public class CircleTimeView extends View {
 
     // Clock configuration
     private int mMinuteMarkCount = DEFAULT_MINUTE_MARK_COUNT;
-    private boolean mIsMultiLapRotationEnabled = false;
+    private boolean mIsMultiLapRotationEnabled = true;
     private boolean mShowLaps = false;
 
     @TimeFormat
@@ -823,10 +824,10 @@ public class CircleTimeView extends View {
             mLabelTextColor = attrs.getColor(R.styleable.CircleTimeView_ctvLabelTextColor, DEFAULT_LABEL_TEXT_COLOR);
             mLabelText = attrs.getString(R.styleable.CircleTimeView_ctvLabelText);
             mLabelText = mLabelText == null ? DEFAULT_LABEL_TEXT : mLabelText;
-            mIsMultiLapRotationEnabled = attrs.getBoolean(R.styleable.CircleTimeView_ctvMultiLapRotation, false);
+            mIsMultiLapRotationEnabled = attrs.getBoolean(R.styleable.CircleTimeView_ctvMultiLapRotation, true);
             mShowLaps = attrs.getBoolean(R.styleable.CircleTimeView_ctvShowLaps, false);
         } catch (Exception ignore) {
-
+            Log.e("CircleTimeView", ignore.getMessage());
         } finally {
             // Release resources
             attrs.recycle();
@@ -1004,14 +1005,14 @@ public class CircleTimeView extends View {
 
     protected void drawQuarterMinutesLabels(Canvas canvas) {
         // Number it is rubbish code
-        float textHeight = getTextBounds(mQuarterNumberPaint, TEXT_MINUTES_15).height();
         float offsetFromCenterX = mInnerRadius - mPaddingInnerRadius - mPaddingQuarterNumber;
         float offsetFromCenterY =
                 (mInnerRadius - mPaddingInnerRadius - mPaddingQuarterNumber);
-        canvas.drawText(TEXT_MINUTES_60, mCenterPoint.x, mCenterPoint.y - offsetFromCenterY, mQuarterNumberPaint);
-        canvas.drawText(TEXT_MINUTES_15, mCenterPoint.x + offsetFromCenterX, mCenterPoint.y + textHeight / 2, mQuarterNumberPaint);
-        canvas.drawText(TEXT_MINUTES_30, mCenterPoint.x, mCenterPoint.y + offsetFromCenterY + textHeight, mQuarterNumberPaint);
-        canvas.drawText(TEXT_MINUTES_45, mCenterPoint.x - offsetFromCenterX, mCenterPoint.y + textHeight / 2,
+        float distanceFromTextBaseLine = +getDistanceFromBaseline(mQuarterNumberPaint);
+        canvas.drawText(TEXT_MINUTES_60, mCenterPoint.x, mCenterPoint.y - offsetFromCenterY + distanceFromTextBaseLine, mQuarterNumberPaint);
+        canvas.drawText(TEXT_MINUTES_30, mCenterPoint.x, mCenterPoint.y + offsetFromCenterY + distanceFromTextBaseLine, mQuarterNumberPaint);
+        canvas.drawText(TEXT_MINUTES_15, mCenterPoint.x + offsetFromCenterX - distanceFromTextBaseLine / 2, mCenterPoint.y + distanceFromTextBaseLine, mQuarterNumberPaint);
+        canvas.drawText(TEXT_MINUTES_45, mCenterPoint.x - offsetFromCenterX + distanceFromTextBaseLine / 2, mCenterPoint.y + distanceFromTextBaseLine,
                 mQuarterNumberPaint);
     }
 

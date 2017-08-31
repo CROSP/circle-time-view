@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_default);
         circleTimeView = (CircleTimeView) findViewById(R.id.circle_timer_view);
         buttonManualSetup = (Button) findViewById(R.id.button_manual_setup);
         buttonStartTimer = (Button) findViewById(R.id.button_start_time);
