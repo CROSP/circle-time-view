@@ -31,7 +31,7 @@ import java.util.TimerTask;
 public class CircleTimeView extends View {
 
     //region Constants
-    private static final String TAG = CircleTimeView.class.getSimpleName();
+    private static final String TAG = net.crosp.libs.android.circletimeview.CircleTimeView.class.getSimpleName();
 
     // Status
     private static final String BUNDLE_STATE = "circle_view_bundle";
@@ -749,11 +749,11 @@ public class CircleTimeView extends View {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         this.setCenterPoint(width, height);
-        this.setInitialCurrentTime();
         // Radius
         this.calculateOuterRadius(width, height);
         this.calculateInnerRadius(width, height);
         this.setInitialHandButtonPoint();
+        this.setInitialCurrentTime();
         setMeasuredDimension(width, height);
     }
 
@@ -779,6 +779,8 @@ public class CircleTimeView extends View {
         super.onDetachedFromWindow();
         // View is now detached, and about to be destroyed
         mTimerHandler = null;
+        mTimer = null;
+        mDefaultTimerTask = null;
     }
     //endregion
 
@@ -791,43 +793,43 @@ public class CircleTimeView extends View {
 
     private void parseAttributes(AttributeSet attributeSet) {
         // Attribute initialization
-        final TypedArray attrs = getContext().obtainStyledAttributes(attributeSet, R.styleable.CircleTimeView, 0, 0);
+        final TypedArray attrs = getContext().obtainStyledAttributes(attributeSet, net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView, 0, 0);
         try {
             Context currentContext = getContext();
-            mCircleButtonRadius = attrs.getDimension(R.styleable.CircleTimeView_ctvCircleHandButtonRadius, getRealUnitValueDp(DEFAULT_CIRCLE_HAND_BUTTON_RADIUS, currentContext));
-            mCircleStrokeWidth = attrs.getDimension(R.styleable.CircleTimeView_ctvCircleStrokeWidth, getRealUnitValueDp(DEFAULT_CIRCLE_STROKE_WIDTH, currentContext));
-            mMarkLineWidth = attrs.getDimension(R.styleable.CircleTimeView_ctvMarkLineWidth, getRealUnitValueDp(DEFAULT_MARK_LINE_WIDTH, currentContext));
-            mPaddingQuarterNumber = attrs.getDimension(R.styleable.CircleTimeView_ctvPaddingQuarterNumber, getRealUnitValueDp(DEFAULT_PADDING_QUARTER_NUMBER, currentContext));
-            mMarginTopLabel = attrs.getDimension(R.styleable.CircleTimeView_ctvMarginTopLabel, getRealUnitValueDp(DEFAULT_PADDING_LABEL, currentContext));
-            mLapLabelMarginTop = attrs.getDimension(R.styleable.CircleTimeView_ctvLapLabelMarginTop, getRealUnitValueDp(DEFAULT_MARGIN_TOP_LAP_LABEL, currentContext));
-            mPaddingInnerRadius = attrs.getDimension(R.styleable.CircleTimeView_ctvPaddingInnerRadius, getRealUnitValueDp(DEFAULT_PADDING_INNER_RADIUS, currentContext));
-            mTimeNumbersTextSize = attrs.getDimension(R.styleable.CircleTimeView_ctvTimeNumbersTextSize, getRealUnitValueDp(DEFAULT_TIMER_NUMBER_TEXT_SIZE, currentContext));
-            mQuarterNumbersTextSize = attrs.getDimension(R.styleable.CircleTimeView_ctvQuarterNumberTextSize, getRealUnitValueDp(DEFAULT_QUARTER_NUMBER_TEXT_SIZE, currentContext));
-            mLabelTextSize = attrs.getDimension(R.styleable.CircleTimeView_ctvLabelTextSize, getRealUnitValueDp(DEFAULT_LABEL_TEXT_SIZE, currentContext));
-            mLapLabelTextSize = attrs.getDimension(R.styleable.CircleTimeView_ctvLapLabelTextSize, getRealUnitValueDp(DEFAULT_LAP_LABEL_TEXT_SIZE, currentContext));
-            mMarkSize = attrs.getDimension(R.styleable.CircleTimeView_ctvMarkSize, getRealUnitValueDp(DEFAULT_MARK_SIZE, currentContext));
-            mQuarterMarkSize = attrs.getDimension(R.styleable.CircleTimeView_ctvQuarterMarkSize, getRealUnitValueDp(DEFAULT_QUARTER_MARK_SIZE, currentContext));
-            mMinuteMarkCount = attrs.getInteger(R.styleable.CircleTimeView_ctvMinutesMarkCount, DEFAULT_MINUTE_MARK_COUNT);
+            mCircleButtonRadius = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCircleHandButtonRadius, getRealUnitValueDp(DEFAULT_CIRCLE_HAND_BUTTON_RADIUS, currentContext));
+            mCircleStrokeWidth = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCircleStrokeWidth, getRealUnitValueDp(DEFAULT_CIRCLE_STROKE_WIDTH, currentContext));
+            mMarkLineWidth = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMarkLineWidth, getRealUnitValueDp(DEFAULT_MARK_LINE_WIDTH, currentContext));
+            mPaddingQuarterNumber = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvPaddingQuarterNumber, getRealUnitValueDp(DEFAULT_PADDING_QUARTER_NUMBER, currentContext));
+            mMarginTopLabel = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMarginTopLabel, getRealUnitValueDp(DEFAULT_PADDING_LABEL, currentContext));
+            mLapLabelMarginTop = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapLabelMarginTop, getRealUnitValueDp(DEFAULT_MARGIN_TOP_LAP_LABEL, currentContext));
+            mPaddingInnerRadius = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvPaddingInnerRadius, getRealUnitValueDp(DEFAULT_PADDING_INNER_RADIUS, currentContext));
+            mTimeNumbersTextSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvTimeNumbersTextSize, getRealUnitValueDp(DEFAULT_TIMER_NUMBER_TEXT_SIZE, currentContext));
+            mQuarterNumbersTextSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvQuarterNumberTextSize, getRealUnitValueDp(DEFAULT_QUARTER_NUMBER_TEXT_SIZE, currentContext));
+            mLabelTextSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLabelTextSize, getRealUnitValueDp(DEFAULT_LABEL_TEXT_SIZE, currentContext));
+            mLapLabelTextSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapLabelTextSize, getRealUnitValueDp(DEFAULT_LAP_LABEL_TEXT_SIZE, currentContext));
+            mMarkSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMarkSize, getRealUnitValueDp(DEFAULT_MARK_SIZE, currentContext));
+            mQuarterMarkSize = attrs.getDimension(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvQuarterMarkSize, getRealUnitValueDp(DEFAULT_QUARTER_MARK_SIZE, currentContext));
+            mMinuteMarkCount = attrs.getInteger(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMinutesMarkCount, DEFAULT_MINUTE_MARK_COUNT);
             //noinspection WrongConstant
-            mCurrentTimeMode = attrs.getInteger(R.styleable.CircleTimeView_ctvTimeMode, MODE_NORMAL);
+            mCurrentTimeMode = attrs.getInteger(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvTimeMode, MODE_NORMAL);
             //noinspection WrongConstant
-            mTimeFormat = attrs.getInteger(R.styleable.CircleTimeView_ctvTimeFormat, FORMAT_SECONDS_MINUTES);
-            mCurrentTimeInSeconds = attrs.getInteger(R.styleable.CircleTimeView_ctvCurrentTimeInSeconds, DEFAULT_TIME);
+            mTimeFormat = attrs.getInteger(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvTimeFormat, FORMAT_SECONDS_MINUTES);
+            mCurrentTimeInSeconds = attrs.getInteger(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCurrentTimeInSeconds, DEFAULT_TIME);
             // Set default color or read xml attributes
-            mCircleColor = attrs.getColor(R.styleable.CircleTimeView_ctvCircleColor, DEFAULT_CIRCLE_COLOR);
-            mCircleButtonColor = attrs.getColor(R.styleable.CircleTimeView_ctvCircleButtonColor, DEFAULT_CIRCLE_BUTTON_COLOR);
-            mCircleButtonPressedColor = attrs.getColor(R.styleable.CircleTimeView_ctvCirclePressedButtonColor, DEFAULT_CIRCLE_BUTTON_COLOR);
-            mLapLabelTextColor = attrs.getColor(R.styleable.CircleTimeView_ctvLapTextColor, DEFAULT_LAP_TEXT_COLOR);
-            mLapBackgroundColor = attrs.getColor(R.styleable.CircleTimeView_ctvLapBackgroundColor, DEFAULT_LAP_BACKGROUND_COLOR);
-            mLineColor = attrs.getColor(R.styleable.CircleTimeView_ctvLineColor, DEFAULT_LINE_COLOR);
-            mHighlightLineColor = attrs.getColor(R.styleable.CircleTimeView_ctvHighlightLineColor, DEFAULT_HIGHLIGHT_LINE_COLOR);
-            mQuarterNumberColor = attrs.getColor(R.styleable.CircleTimeView_ctvQuarterNumberColor, DEFAULT_QUARTER_NUMBER_COLOR);
-            mTimeNumberColor = attrs.getColor(R.styleable.CircleTimeView_ctvTimeNumberColor, DEFAULT_TIME_NUMBER_COLOR);
-            mLabelTextColor = attrs.getColor(R.styleable.CircleTimeView_ctvLabelTextColor, DEFAULT_LABEL_TEXT_COLOR);
-            mLabelText = attrs.getString(R.styleable.CircleTimeView_ctvLabelText);
+            mCircleColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCircleColor, DEFAULT_CIRCLE_COLOR);
+            mCircleButtonColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCircleButtonColor, DEFAULT_CIRCLE_BUTTON_COLOR);
+            mCircleButtonPressedColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCirclePressedButtonColor, DEFAULT_CIRCLE_BUTTON_COLOR);
+            mLapLabelTextColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapTextColor, DEFAULT_LAP_TEXT_COLOR);
+            mLapBackgroundColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapBackgroundColor, DEFAULT_LAP_BACKGROUND_COLOR);
+            mLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLineColor, DEFAULT_LINE_COLOR);
+            mHighlightLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvHighlightLineColor, DEFAULT_HIGHLIGHT_LINE_COLOR);
+            mQuarterNumberColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvQuarterNumberColor, DEFAULT_QUARTER_NUMBER_COLOR);
+            mTimeNumberColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvTimeNumberColor, DEFAULT_TIME_NUMBER_COLOR);
+            mLabelTextColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLabelTextColor, DEFAULT_LABEL_TEXT_COLOR);
+            mLabelText = attrs.getString(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLabelText);
             mLabelText = mLabelText == null ? DEFAULT_LABEL_TEXT : mLabelText;
-            mIsMultiLapRotationEnabled = attrs.getBoolean(R.styleable.CircleTimeView_ctvMultiLapRotation, true);
-            mShowLaps = attrs.getBoolean(R.styleable.CircleTimeView_ctvShowLaps, false);
+            mIsMultiLapRotationEnabled = attrs.getBoolean(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMultiLapRotation, true);
+            mShowLaps = attrs.getBoolean(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvShowLaps, false);
         } catch (Exception ignore) {
             Log.e("CircleTimeView", ignore.getMessage());
         } finally {
