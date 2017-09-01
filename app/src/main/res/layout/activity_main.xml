@@ -20,7 +20,7 @@
         app:ctvCircleHandButtonRadius="10dp"
         app:ctvCirclePressedButtonColor="#08bfdf"
         app:ctvCircleStrokeWidth="1dp"
-        app:ctvCurrentTimeInSeconds="1000"
+        app:ctvCurrentTimeInSeconds="60"
         app:ctvHighlightLineColor="#00f7ff"
         app:ctvLabelText="The сlock is ticking"
         app:ctvLabelTextColor="#fff"

@@ -602,7 +602,7 @@ public class CircleTimeView extends View {
      * start mTimer
      */
     public void startTimer() {
-        if (mCurrentRadianAngle > 0 && !mStarted) {
+        if (mCurrentTimeInSeconds > 0 && !mStarted) {
             mCurrentTimeMode = MODE_TIMER;
             if (mTimer == null) {
                 mTimer = new Timer();
