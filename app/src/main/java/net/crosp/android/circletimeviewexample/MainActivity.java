@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 changeAppearance();
             }
         }, 8000);
+
+
     }
 
     private void changeAppearance() {

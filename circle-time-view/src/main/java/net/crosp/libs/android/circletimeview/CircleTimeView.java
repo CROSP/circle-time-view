@@ -188,7 +188,7 @@ public class CircleTimeView extends View {
     private long mTimeBeforeHandTouch;
     private long mLapsAfterTouch = 0;
 
-    private TimerTask mDefaultTimerTask = new DefaultTimerTaks();
+    private TimerTask mDefaultTimerTask = new DefaultTimerTask();
 
     private Handler mTimerHandler = new Handler() {
         @Override
@@ -248,12 +248,14 @@ public class CircleTimeView extends View {
         String getLapLabelText(long currentTimeInSeconds);
     }
 
-    private class DefaultTimerTaks extends TimerTask {
+    private class DefaultTimerTask extends TimerTask {
         @Override
         public void run() {
-            Message message = mTimerHandler.obtainMessage(TIMER_HANDLER_MESSAGE_WHAT);
-            if (message != null) {
-                message.sendToTarget();
+            if (mTimerHandler != null) {
+                Message message = mTimerHandler.obtainMessage(TIMER_HANDLER_MESSAGE_WHAT);
+                if (message != null) {
+                    message.sendToTarget();
+                }
             }
         }
     }
@@ -608,7 +610,7 @@ public class CircleTimeView extends View {
                 mTimer = new Timer();
             }
             if (mDefaultTimerTask == null) {
-                mDefaultTimerTask = new DefaultTimerTaks();
+                mDefaultTimerTask = new DefaultTimerTask();
             }
             mTimer.schedule(mDefaultTimerTask, TIMER_DELAY, TIMER_DEFAULT_PERIOD);
             mStarted = true;
@@ -747,11 +749,11 @@ public class CircleTimeView extends View {
         int height = MeasureSpec.getSize(heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         this.setCenterPoint(width, height);
-        this.setInitialHandButtonPoint();
         this.setInitialCurrentTime();
         // Radius
         this.calculateOuterRadius(width, height);
         this.calculateInnerRadius(width, height);
+        this.setInitialHandButtonPoint();
         setMeasuredDimension(width, height);
     }
 
