@@ -17,7 +17,7 @@ This library requires [API level 8](http://developer.android.com/guide/topics/ma
 <img src="https://crosp.net/wp-content/uploads/2017/09/Screenshot_1504370362.png" width="400">
 
 ### Demo application
-<a href="https://play.google.com/store/apps/details?id=com.unnamed.b.atv.demo">
+<a href="https://play.google.com/store/apps/details?id=net.crosp.android.circletimeviewexample">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="300"  />
 </a>
 
