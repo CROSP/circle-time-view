@@ -24,9 +24,9 @@
         <attr name="ctvCircleColor" format="color|integer"/>
         <attr name="ctvCircleButtonColor" format="color|integer"/>
         <attr name="ctvCirclePressedButtonColor" format="color|integer"/>
-        <attr name="ctvLineColor" format="color|integer"/>
+        <attr name="ctvMarkLineColor" format="color|integer"/>
         <attr name="ctvQuarterNumberColor" format="color|integer"/>
-        <attr name="ctvHighlightLineColor" format="color|integer"/>
+        <attr name="ctvHighlightMarkLineColor" format="color|integer"/>
         <attr name="ctvTimeNumberColor" format="color|integer"/>
         <attr name="ctvLabelTextColor" format="color|integer"/>
         <attr name="ctvLapBackgroundColor" format="color|integer"/>

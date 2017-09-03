@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeAppearance() {
-        circleTimeView.setHighlightLineColor(Color.GREEN);
+        circleTimeView.setHighlightMarkLineColor(Color.GREEN);
         circleTimeView.setCircleButtonColor(Color.GREEN);
         circleTimeView.setCircleButtonPressedColor(Color.GREEN);
         circleTimeView.setCircleColor(Color.CYAN);
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         circleTimeView.setLapLabelTextColor(Color.BLACK);
         circleTimeView.setLapLabelMarginTop(12);
         circleTimeView.setLapLabelTextSize(20);
-        circleTimeView.setLineColor(Color.CYAN);
+        circleTimeView.setMarkLineColor(Color.CYAN);
         circleTimeView.setMarginTopLabel(10);
         circleTimeView.setMinuteMarkCount(60);
         circleTimeView.setMarkLineWidth(3);

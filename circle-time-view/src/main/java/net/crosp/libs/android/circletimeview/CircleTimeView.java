@@ -21,8 +21,6 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
-import net.crosp.libraries.android.circletimeview.R;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Timer;
@@ -126,8 +124,8 @@ public class CircleTimeView extends View {
     // Color
     private int mCircleColor;
     private int mCircleButtonColor;
-    private int mLineColor;
-    private int mHighlightLineColor;
+    private int mMarkLineColor;
+    private int mHighlightMarkLineColor;
     private int mTimeNumberColor;
     private int mCircleButtonPressedColor;
     private int mLapLabelTextColor;
@@ -340,13 +338,13 @@ public class CircleTimeView extends View {
     // Getters and setters
 
 
-    public int getHighlightLineColor() {
-        return mHighlightLineColor;
+    public int getHighlightMarkLineColor() {
+        return mHighlightMarkLineColor;
     }
 
-    public void setHighlightLineColor(int highlightLineColor) {
-        mHighlightLineColor = highlightLineColor;
-        mHighlightLinePaint.setColor(mHighlightLineColor);
+    public void setHighlightMarkLineColor(int highlightMarkLineColor) {
+        mHighlightMarkLineColor = highlightMarkLineColor;
+        mHighlightLinePaint.setColor(mHighlightMarkLineColor);
     }
 
     public float getMarkSize() {
@@ -459,13 +457,13 @@ public class CircleTimeView extends View {
         mLapLabelTextPaint.setTextSize(mLapLabelTextSize);
     }
 
-    public int getLineColor() {
-        return mLineColor;
+    public int getMarkLineColor() {
+        return mMarkLineColor;
     }
 
-    public void setLineColor(int lineColor) {
-        mLineColor = lineColor;
-        mLinePaint.setColor(mLineColor);
+    public void setMarkLineColor(int markLineColor) {
+        mMarkLineColor = markLineColor;
+        mLinePaint.setColor(mMarkLineColor);
     }
 
     public float getMarginTopLabel() {
@@ -821,8 +819,8 @@ public class CircleTimeView extends View {
             mCircleButtonPressedColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvCirclePressedButtonColor, DEFAULT_CIRCLE_BUTTON_COLOR);
             mLapLabelTextColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapTextColor, DEFAULT_LAP_TEXT_COLOR);
             mLapBackgroundColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLapBackgroundColor, DEFAULT_LAP_BACKGROUND_COLOR);
-            mLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLineColor, DEFAULT_LINE_COLOR);
-            mHighlightLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvHighlightLineColor, DEFAULT_HIGHLIGHT_LINE_COLOR);
+            mMarkLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvMarkLineColor, DEFAULT_LINE_COLOR);
+            mHighlightMarkLineColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvHighlightMarkLineColor, DEFAULT_HIGHLIGHT_LINE_COLOR);
             mQuarterNumberColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvQuarterNumberColor, DEFAULT_QUARTER_NUMBER_COLOR);
             mTimeNumberColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvTimeNumberColor, DEFAULT_TIME_NUMBER_COLOR);
             mLabelTextColor = attrs.getColor(net.crosp.libraries.android.circletimeview.R.styleable.CircleTimeView_ctvLabelTextColor, DEFAULT_LABEL_TEXT_COLOR);
@@ -879,11 +877,11 @@ public class CircleTimeView extends View {
         mLapLabelBackgroundPaint.setStyle(Paint.Style.FILL);
 
         // LinePaint
-        mLinePaint.setColor(mLineColor);
+        mLinePaint.setColor(mMarkLineColor);
         mLinePaint.setStrokeWidth(mMarkLineWidth);
 
         // HighlightLinePaint
-        mHighlightLinePaint.setColor(mHighlightLineColor);
+        mHighlightLinePaint.setColor(mHighlightMarkLineColor);
         mHighlightLinePaint.setStrokeWidth(mMarkLineWidth);
 
         // Time Quarter number paint
@@ -985,7 +983,7 @@ public class CircleTimeView extends View {
     }
 
     protected void drawClockLabel(Canvas canvas, PointF bottomPointOfLapLabel) {
-        if (mLabelText != null && !mLabelText.isEmpty()) {
+        if (mLabelText != null && !("").equals(mLabelText)) {
             canvas.drawText(mLabelText, bottomPointOfLapLabel.x, bottomPointOfLapLabel.y + getTextBounds(mLabelTextPaint, mLabelText).height() + mMarginTopLabel, mLabelTextPaint);
         }
     }
