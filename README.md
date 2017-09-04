@@ -131,6 +131,42 @@ In case of using the lap label you should provide your own implementation of the
             }
         });
 ```
+You can also listen to timer and time events. You need to implement **CircleTimerListener** and **CircleTimeListener** respectively.
+
+```java
+circleTimeView.setCircleTimeListener(new CircleTimeView.CircleTimeListener() {
+            @Override
+            public void onTimeManuallySet(long time) {
+                Log.d("TIME LISTENER", "onTimeManuallySet " + time);
+            }
+
+            @Override
+            public void onTimeManuallyChanged(long time) {
+                Log.d("TIME LISTENER", "onTimeManuallyChanged " + time);
+            }
+
+            @Override
+            public void onTimeUpdated(long time) {
+                Log.d("TIME LISTENER", "onTimeUpdated " + time);
+            }
+        });
+        circleTimeView.setCircleTimerListener(new CircleTimeView.CircleTimerListener() {
+            @Override
+            public void onTimerStop() {
+                Log.d("TIMER LISTENER", "onTimerStop ");
+
+            }
+            @Override
+            public void onTimerStart(long time) {
+                Log.d("TIMER LISTENER", "onTimerStart " + time);
+            }
+
+            @Override
+            public void onTimerTimeValueChanged(long time) {
+                Log.d("TIMER LISTENER", "onTimerTimeValueChanged " + time);
+            }
+        });
+```
 
 
 ### Attributes
