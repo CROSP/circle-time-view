@@ -134,7 +134,7 @@ In case of using the lap label you should provide your own implementation of the
 You can also listen to timer and time events. You need to implement **CircleTimerListener** and **CircleTimeListener** respectively.
 
 ```java
-circleTimeView.setCircleTimeListener(new CircleTimeView.CircleTimeListener() {
+         circleTimeView.setCircleTimeListener(new CircleTimeView.CircleTimeListener() {
             @Override
             public void onTimeManuallySet(long time) {
                 Log.d("TIME LISTENER", "onTimeManuallySet " + time);
