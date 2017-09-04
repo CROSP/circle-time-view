@@ -1,5 +1,5 @@
 # Circle Time View
-[![Android Arsenal](http://img.shields.io/badge/Android%20Arsenal-CircleTimeView-blue.svg?style=flat)]()
+[![Android Arsenal](http://img.shields.io/badge/Android%20Arsenal-CircleTimeView-blue.svg?style=flat)](https://android-arsenal.com/details/1/6151)
 
 <img src="https://crosp.net/wp-content/uploads/2017/09/CircleTimeViewTitle.jpg">
 
