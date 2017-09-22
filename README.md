@@ -91,7 +91,7 @@ To set time manually use the following method.
 ```java
  circleTimeView.setCurrentTime(20000);
 ```
-This method accepts seconds and the display format is **FORMAT_SECONDS_MINUTES**.
+This method accepts seconds and the display format is **FORMAT_SECONDS_MINUTES** is used by default.
 
 If you need to set another time format. There is another method that accepts the format as the second argument.
 
@@ -100,7 +100,7 @@ public void setCurrentTime(long time, @TimeFormat int timeFormat) {
 ```
 There are two time displaying formats available.
 
- Attribute                                                          | Description
+ Format                                                          | Description
 | --------------------------------------------------------------- | -----------
 | FORMAT_SECONDS_MINUTES         | First two numbers will display minutes and last two numbers will contain seconds.
 | FORMAT_MINUTES_HOURS    | First two numbers will display hours and last two numbers will contain minutes.
@@ -149,7 +149,7 @@ In case of using the lap label you should provide your own implementation of the
             }
         });
 ```
-You can also listen to timer and time events. You need to implement **CircleTimerListener** and **CircleTimeListener** respectively.
+You can listen to timer and time events. You need to implement **CircleTimerListener** and **CircleTimeListener** respectively.
 
 ```java
          circleTimeView.setCircleTimeListener(new CircleTimeView.CircleTimeListener() {
